@@ -3,116 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fake News Intelligence System</title>
-    <!-- Modern Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="AI-powered Fake News Intelligence System to analyze and score news authenticity locally.">
+    <title>Fake News Intelligence System | AI Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="background-effects">
-        <div class="glow-orb orb-1"></div>
-        <div class="glow-orb orb-2"></div>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="navbar glass-panel">
-        <div class="nav-brand">
-            <svg class="brand-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-            <span id="title_nav">Intelligence System</span>
+    <div class="bg-gradient focus-ring"></div>
+    
+    <header class="navbar" role="banner">
+        <div class="brand">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <span id="navTitle">Intelligence System</span>
         </div>
-        <div class="nav-controls">
-            <button id="toggleHostoryBtn" class="btn-ghost" onclick="toggleHistory()">
-                <span id="txt_history_btn">History</span>
+        <nav class="nav-controls" role="navigation" aria-label="Main Navigation">
+            <button class="btn btn-outline" id="btnSystemTest" onclick="runSystemTest()" aria-label="Run automated system tests">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                System Tests
             </button>
-            <div class="lang-toggle">
-                <span class="lang-label" id="lang_en">EN</span>
-                <label class="switch">
-                    <input type="checkbox" id="languageToggle" onchange="switchLanguage()">
+            <button class="btn btn-outline" id="btnHistory" onclick="toggleHistory()" aria-label="View analysis history">History</button>
+            <div class="lang-toggle" aria-label="Language Toggle">
+                <span class="lang-text" aria-hidden="true">EN</span>
+                <label class="switch" aria-label="Toggle English / Telugu">
+                    <input type="checkbox" id="langSwitch" onchange="toggleLanguage()" aria-label="Language Switch">
                     <span class="slider round"></span>
                 </label>
-                <span class="lang-label" id="lang_te">TE</span>
+                <span class="lang-text" aria-hidden="true">TE</span>
             </div>
+        </nav>
+    </header>
+
+    <main class="dashboard-container" role="main">
+        
+        <!-- Warning Toast -->
+        <div id="toastWarning" class="toast hidden" role="alert" aria-live="assertive">
+            <span>⚠️ Input cannot be empty! Please provide text.</span>
         </div>
-    </nav>
 
-    <!-- Main Container -->
-    <main class="container">
-        <!-- Input Section -->
-        <section class="input-section glass-panel">
-            <h1 id="txt_header_main">Analyze News Content</h1>
-            <p class="subtitle" id="txt_subtitle">Detect misleading patterns and fact-check text instantly using our local rule-based AI engine.</p>
-            
-            <div class="input-wrapper">
-                <textarea id="newsInput" placeholder="Paste the news article or headline here..." spellcheck="false"></textarea>
-                <div class="word-count"><span id="charCount">0</span> <span id="txt_characters">characters</span></div>
-            </div>
-
-            <button class="btn-primary" id="analyzeBtn" onclick="analyzeText()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                <span id="btn_analyze_txt">Analyze Content</span>
-            </button>
-        </section>
-
-        <!-- Results Section (Hidden initially) -->
-        <section class="results-section glass-panel" id="resultsPanel" style="display: none;">
-            <div class="results-header">
-                <div>
-                    <h2 id="txt_analysis_result">Analysis Result</h2>
-                    <div class="classification-badge" id="classBadge">Analyzing...</div>
-                </div>
-                <div class="score-container">
-                    <div class="circular-progress" id="scoreCircle">
-                        <span class="progress-value" id="scoreValue">0%</span>
-                    </div>
-                    <div class="score-label" id="txt_confidence">Confidence</div>
-                </div>
-            </div>
-
-            <div class="results-grid">
-                <!-- Highlighted Text -->
-                <div class="detail-card">
-                    <h3 id="txt_content_scan">Content Scan</h3>
-                    <div id="highlightedOutput" class="highlight-box">
-                        <!-- Highlighed text populated here -->
-                    </div>
-                    <div class="legend">
-                        <span class="legend-item"><span class="dot dot-red"></span> <span id="txt_leg_suspicious">Suspicious</span></span>
-                        <span class="legend-item"><span class="dot dot-green"></span> <span id="txt_leg_authentic">Authentic</span></span>
+        <section class="grid-layout">
+            <!-- Left Column: Input -->
+            <section class="input-panel card" aria-labelledby="analyzeHeader">
+                <h1 id="analyzeHeader" class="card-title text-gradient">Analyze News</h1>
+                <p id="analyzeDesc" class="card-desc">Detect misleading patterns instantly using our local AI-like engine.</p>
+                
+                <div class="input-group">
+                    <label for="newsInput" class="sr-only">News Content Input</label>
+                    <textarea id="newsInput" class="text-input" placeholder="Paste article or headline here..." aria-label="Paste news text here" spellcheck="false" oninput="updateCharCount()"></textarea>
+                    <div class="input-footer">
+                        <span id="charCount" aria-live="polite">0 chars</span>
+                        <button id="btnAnalyze" class="btn btn-primary" onclick="handleAnalyzeClick()" aria-label="Analyze Content">
+                            Analyze Content
+                        </button>
                     </div>
                 </div>
 
-                <!-- Explanation & Verification -->
-                <div class="detail-column">
-                    <div class="detail-card outline">
-                        <h3 id="txt_explanation">Explanation</h3>
-                        <p id="explanationText">Analysis pending...</p>
+                <div class="why-matters">
+                    <h3 id="whyMattersTitle">Why Fake News Detection Matters</h3>
+                    <p id="whyMattersDesc">Misinformation spreads 6x faster than truth. By analyzing emotional triggers and clickbait structures before sharing, we can actively prevent the dangerous spread of false narratives and protect digital integrity.</p>
+                </div>
+            </section>
+
+            <!-- Right Column: System Test or Results -->
+            <section class="results-panel">
+                <!-- Test Results Panel -->
+                <article id="testResultsCard" class="card hidden" aria-labelledby="testHeader">
+                    <h2 id="testHeader" class="card-title">System Test Report</h2>
+                    <div class="accuracy-banner">
+                        <span class="accuracy-label">Engine Accuracy: </span>
+                        <span id="accuracyScore" class="text-gradient">--%</span>
+                    </div>
+                    <ul id="testCasesList" class="test-list" aria-label="Test case results"></ul>
+                </article>
+
+                <!-- Analysis Results Panel -->
+                <article id="analysisCard" class="card hidden" aria-labelledby="resultsHeader">
+                    <div class="flex-between">
+                        <h2 id="resultsHeader" class="card-title">Analysis Result</h2>
+                        <div id="statusBadge" class="badge" role="status">Pending</div>
                     </div>
                     
-                    <div class="detail-card outline">
-                        <h3 id="txt_verification">Verification Steps</h3>
-                        <ul id="verificationList" class="tip-list">
-                            <!-- Populated dynamically -->
-                        </ul>
+                    <div class="confidence-section">
+                        <div class="flex-between mb-1">
+                            <span class="conf-label text-muted">Confidence Score</span>
+                            <span id="scoreText" class="conf-value font-bold">0%</span>
+                        </div>
+                        <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressTrack">
+                            <div id="progressBar" class="progress-fill"></div>
+                        </div>
                     </div>
-                </div>
-            </div>
+
+                    <div class="metrics-grid">
+                        <div class="metric">
+                            <span class="metric-val" id="valClickbait">0</span>
+                            <span class="metric-lbl">Clickbait</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-val" id="valEmotional">0</span>
+                            <span class="metric-lbl">Emotional</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-val" id="valCredibility">0</span>
+                            <span class="metric-lbl">Credible</span>
+                        </div>
+                    </div>
+
+                    <div class="accordion">
+                        <h3 class="subtitle">Content Scan</h3>
+                        <div id="highlightBox" class="highlight-box bg-dark" aria-live="polite"></div>
+                        <div class="legend-row">
+                            <span class="legend"><span class="dot clickbait"></span> Clickbait/Fake</span>
+                            <span class="legend"><span class="dot emotional"></span> Emotional</span>
+                            <span class="legend"><span class="dot credible"></span> Credible</span>
+                        </div>
+                    </div>
+
+                    <div class="reasons-box">
+                        <h3 class="subtitle">Reasoning</h3>
+                        <ul id="reasonsList" class="list-reasons text-muted"></ul>
+                    </div>
+                </article>
+            </section>
         </section>
     </main>
 
     <!-- History Sidebar -->
-    <div class="history-sidebar" id="historySidebar">
-        <div class="history-header">
-            <h3 id="txt_history_title">Analysis History</h3>
-            <button class="btn-icon" onclick="toggleHistory()">×</button>
+    <aside id="historySidebar" class="sidebar" aria-hidden="true" role="complementary" aria-label="History">
+        <div class="sidebar-header">
+            <h3>History</h3>
+            <button class="btn-icon" onclick="toggleHistory()" aria-label="Close History">×</button>
         </div>
-        <div class="history-content" id="historyList">
-            <!-- Populated via JS -->
-            <p class="empty-state" id="txt_history_empty">No history found.</p>
-        </div>
-    </div>
-    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleHistory()"></div>
+        <div id="historyList" class="sidebar-content"></div>
+    </aside>
+    <div id="sidebarOverlay" class="overlay" onclick="toggleHistory()" aria-hidden="true"></div>
 
     <script src="app.js"></script>
 </body>
