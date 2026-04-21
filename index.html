@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Intelligence System</title>
+    <!-- Modern Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-effects">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar glass-panel">
+        <div class="nav-brand">
+            <svg class="brand-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <span id="title_nav">Intelligence System</span>
+        </div>
+        <div class="nav-controls">
+            <button id="toggleHostoryBtn" class="btn-ghost" onclick="toggleHistory()">
+                <span id="txt_history_btn">History</span>
+            </button>
+            <div class="lang-toggle">
+                <span class="lang-label" id="lang_en">EN</span>
+                <label class="switch">
+                    <input type="checkbox" id="languageToggle" onchange="switchLanguage()">
+                    <span class="slider round"></span>
+                </label>
+                <span class="lang-label" id="lang_te">TE</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="container">
+        <!-- Input Section -->
+        <section class="input-section glass-panel">
+            <h1 id="txt_header_main">Analyze News Content</h1>
+            <p class="subtitle" id="txt_subtitle">Detect misleading patterns and fact-check text instantly using our local rule-based AI engine.</p>
+            
+            <div class="input-wrapper">
+                <textarea id="newsInput" placeholder="Paste the news article or headline here..." spellcheck="false"></textarea>
+                <div class="word-count"><span id="charCount">0</span> <span id="txt_characters">characters</span></div>
+            </div>
+
+            <button class="btn-primary" id="analyzeBtn" onclick="analyzeText()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                <span id="btn_analyze_txt">Analyze Content</span>
+            </button>
+        </section>
+
+        <!-- Results Section (Hidden initially) -->
+        <section class="results-section glass-panel" id="resultsPanel" style="display: none;">
+            <div class="results-header">
+                <div>
+                    <h2 id="txt_analysis_result">Analysis Result</h2>
+                    <div class="classification-badge" id="classBadge">Analyzing...</div>
+                </div>
+                <div class="score-container">
+                    <div class="circular-progress" id="scoreCircle">
+                        <span class="progress-value" id="scoreValue">0%</span>
+                    </div>
+                    <div class="score-label" id="txt_confidence">Confidence</div>
+                </div>
+            </div>
+
+            <div class="results-grid">
+                <!-- Highlighted Text -->
+                <div class="detail-card">
+                    <h3 id="txt_content_scan">Content Scan</h3>
+                    <div id="highlightedOutput" class="highlight-box">
+                        <!-- Highlighed text populated here -->
+                    </div>
+                    <div class="legend">
+                        <span class="legend-item"><span class="dot dot-red"></span> <span id="txt_leg_suspicious">Suspicious</span></span>
+                        <span class="legend-item"><span class="dot dot-green"></span> <span id="txt_leg_authentic">Authentic</span></span>
+                    </div>
+                </div>
+
+                <!-- Explanation & Verification -->
+                <div class="detail-column">
+                    <div class="detail-card outline">
+                        <h3 id="txt_explanation">Explanation</h3>
+                        <p id="explanationText">Analysis pending...</p>
+                    </div>
+                    
+                    <div class="detail-card outline">
+                        <h3 id="txt_verification">Verification Steps</h3>
+                        <ul id="verificationList" class="tip-list">
+                            <!-- Populated dynamically -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- History Sidebar -->
+    <div class="history-sidebar" id="historySidebar">
+        <div class="history-header">
+            <h3 id="txt_history_title">Analysis History</h3>
+            <button class="btn-icon" onclick="toggleHistory()">×</button>
+        </div>
+        <div class="history-content" id="historyList">
+            <!-- Populated via JS -->
+            <p class="empty-state" id="txt_history_empty">No history found.</p>
+        </div>
+    </div>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleHistory()"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
