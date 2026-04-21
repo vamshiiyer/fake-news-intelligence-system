@@ -1,162 +1,177 @@
 # 🧠 Fake News Intelligence System
 
-## 🚀 Overview
+🚀 A lightweight, AI-inspired web application that analyzes news content and classifies it as **Real**, **Fake**, or **Misleading** using an intelligent rule-based scoring engine.
 
-**Fake News Intelligence System** is a lightweight, AI-style web application that detects whether a piece of news is **Real**, **Fake**, or **Misleading** using **rule-based intelligence**.
-It simulates intelligent decision-making locally (no external APIs), making it fast, private, and deployable at scale.
-
----
-
-## ❗ Problem Statement
-
-Misinformation spreads rapidly during elections and major events, influencing public opinion and causing confusion.
-There is a need for a **simple, accessible tool** that helps users quickly evaluate the credibility of news content.
+Built for **PromptWars Hack2Skill Challenge** with a focus on real-world usability, explainability, and performance — all without external APIs.
 
 ---
 
-## 💡 Proposed Solution
+## 🌍 Problem Statement
 
-This system analyzes user-input text and:
-
-* Classifies it as **Real / Fake / Misleading**
-* Generates a **confidence score (0–100%)**
-* Highlights **suspicious keywords**
-* Provides a **clear explanation**
-* Suggests **verification steps**
+Fake news spreads rapidly across digital platforms, influencing public opinion and decision-making.
+This project aims to provide a **fast, accessible, and transparent tool** to help users evaluate the credibility of news content instantly.
 
 ---
 
-## ✨ Key Features
+## 💡 Solution Overview
 
-### 🧠 Smart Text Analyzer
+The system simulates AI behavior using a **multi-factor scoring engine** that evaluates:
 
-* Detects emotional, exaggerated, and misleading language
-* Uses keyword and tone-based scoring
+* 🟣 Clickbait patterns
+* 🔴 Emotional manipulation
+* 🟢 Credibility indicators
 
-### 📊 Confidence Score
+It generates:
 
-* Outputs a percentage (0–100%)
-* Visual indicator (progress bar / color-coded)
-
-### 🔍 Keyword Highlighting
-
-* Highlights trigger words (e.g., *shocking, viral, breaking*)
-* Improves transparency and user trust
-
-### 🧾 Explanation Engine
-
-* Explains **why** content is classified as fake/real
-* Example:
-
-  * “Contains exaggerated language”
-  * “Uses emotional trigger words”
-
-### 📚 History Tracking
-
-* Stores recent analyses using **localStorage**
-* Allows users to revisit past checks
-
-### 🌐 Multilingual Support
-
-* Supports **English + Telugu**
-* Improves accessibility for Indian users
-
-### 📱 Responsive UI
-
-* Clean, modern interface
-* Works on desktop and mobile
+* Classification (Real / Fake / Misleading)
+* Confidence score
+* Reasoning behind the decision
+* Highlighted trigger words
 
 ---
 
-## 🧠 Core Logic
+## ✨ Features
 
-The system uses **condition-based scoring (if–else logic)**:
+### 🔍 Smart Content Analysis
 
-* Words like:
+* Real-time classification of news text
+* Detects misleading patterns and manipulative language
+* Provides explainable AI-like reasoning
 
-  * *“shocking”, “viral”, “secret”* → increase fake score
-* Words like:
+### 📊 Confidence Scoring System
 
-  * *“official”, “report”, “confirmed”* → reduce fake score
+* Weighted scoring algorithm
+* Outputs confidence percentage
+* Visual progress bar for clarity
 
-Final classification is based on score thresholds:
+### 🧪 Built-in Testing Engine
 
-* **0–30 → Real**
-* **31–60 → Misleading**
-* **61–100 → Fake**
+* Predefined test cases
+* Accuracy calculation
+* Ensures reliability and validation of logic
+
+### 🧠 Explainable Results
+
+* “Why this result?” section
+* Keyword highlighting
+* Transparent decision-making
+
+### 📁 History Tracking
+
+* Saves previous analyses using `localStorage`
+* Quick access to past results
+
+### 🌐 Bilingual Support
+
+* English + Telugu toggle support
+* Dynamic UI updates
+
+### ⚡ Fully Client-Side
+
+* No APIs
+* No backend
+* Runs instantly in browser
 
 ---
 
-## ⚙️ Tech Stack
+## 🏗️ Tech Stack
 
-* HTML
-* CSS
-* JavaScript
-
-✔ No backend
-✔ No external APIs
-✔ Fully client-side
+* HTML5 (Semantic structure)
+* CSS3 (Modern UI + animations)
+* Vanilla JavaScript (Core logic + AI simulation)
 
 ---
 
-## ☁️ Cloud Perspective
+## ⚙️ How It Works
 
-This project is designed following **cloud-first architecture principles inspired by Google Cloud**.
+1. User inputs news content
+2. System scans for predefined keyword patterns
+3. Applies weighted scoring logic:
 
-It demonstrates how AI-like systems can be:
-
-* Scalable
-* Lightweight
-* Efficient
-* Deployable for millions of users
+   * Clickbait score
+   * Emotional score
+   * Credibility score
+4. Final classification is computed
+5. Results are displayed with explanation and highlights
 
 ---
 
-## 🚀 Live Demo
+## ▶️ How to Run
+
+### Option 1: Local
+
+```bash
+Open index.html in your browser
+```
+
+### Option 2: Live Demo
 
 👉 https://vamshiiyer.github.io/fake-news-intelligence-system/
 
 ---
 
-## 📌 How to Run Locally
+## 🧪 Testing & Validation
 
-1. Clone the repository
-2. Open `index.html` in browser
+The system includes a built-in testing module:
 
-OR run local server:
+* Multiple predefined scenarios
+* Expected vs actual comparison
+* Accuracy percentage calculation
 
-```bash
-python3 -m http.server 8000
-```
-
-Then open:
-
-```
-http://localhost:8000
-```
+This ensures robustness and improves reliability.
 
 ---
 
-## 🔒 Security & Responsibility
+## ♿ Accessibility
 
-* No user data is stored externally
-* Encourages responsible sharing of information
-* Promotes awareness against misinformation
+* Semantic HTML elements
+* Keyboard-friendly interactions
+* Clear UI contrast and readability
 
 ---
 
-## 🔮 Future Enhancements
+## 🔐 Security & Performance
 
-* Integration with real AI/NLP models
-* Real-time news verification APIs
-* Voice-based input
-* Advanced sentiment analysis
+* No external dependencies
+* No data collection
+* Fast execution (optimized DOM operations)
+
+---
+
+## 🎯 Hackathon Context
+
+Developed as part of **PromptWars Virtual – Hack2Skill**
+Focused on:
+
+* AI-native thinking
+* Practical usability
+* Clean architecture
+* Zero-dependency deployment
+
+---
+
+## 🚀 Future Enhancements
+
+* ML-based classification model
+* Browser extension integration
+* Real-time news source verification
+* Multi-language expansion
 
 ---
 
 ## 👨‍💻 Author
 
 **Ayyavari Vamshi Krishna**
+GitHub: https://github.com/vamshiiyer
+
+---
+
+## ⭐ Final Note
+
+This project demonstrates how **AI-like intelligence can be simulated efficiently without heavy infrastructure**, making it accessible, fast, and scalable.
+
+---
+
 
 ---
 
